@@ -42,10 +42,8 @@ var Player = mongoose.model("Player", playerSchema);
 // })
 
 //SOCKET IO CHAT
-//var server = require('http').Server(app);
-//var io = socketio.listen(server);
-var server = http.createServer(app);
 
+var server = http.createServer(app);
 var io = socketio.listen(server);
 
 var messages = [];
@@ -55,6 +53,17 @@ var rooms = [];
 io.on('connection', function(socket){
     console.log("Connected socket");
     console.log(socket.id);
+    
+    // Handle chat event
+    socket.on('chat', function(data){
+        // console.log(data);
+        io.sockets.emit('chat', data);
+    });
+
+    // Handle typing event
+    socket.on('typing', function(data){
+        socket.broadcast.emit('typing', data);
+    });
     
     var room_id, player_id;
     
@@ -81,6 +90,10 @@ app.get("/:id", function(req, res){
 app.get("/gamepage", function(req, res){
     res.render("gamepage");
 });
+
+app.get("*", function(req, res){
+    res.send("You done fucked up. Page not found - 404 error.")
+})
 
 //START SERVER
 // app.listen(process.env.PORT, process.env.IP, function(){
