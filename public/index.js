@@ -1,4 +1,5 @@
 $( document ).ready(function () {
+  
     var locations  = {
         //spyfall 1
         "airplane":1,
@@ -28,6 +29,7 @@ $( document ).ready(function () {
         "submarine":1,
         "supermarket":1,
         "university":1,
+        
         //spyfall 2
         "amusement_park":2,
         "art_museum":2,
@@ -61,18 +63,65 @@ $( document ).ready(function () {
     console.log(today.getMinutes());
     console.log(today.getSeconds());
     console.log("Running index.js");
-    const MIN_PLAYERS = 3;
-    const MAX_PLAYERS = 12;
-
-    $("#jump-text").html("Inserting jQuery text.");
+    
+    // $("#jump-text").html("Inserting jQuery text.");
 
 
     $("#start-button").click(function(){
-      console.log(this);
+      // console.log(this);
+      $("#game-form").toggleClass("invis");
     });
     
     $("#join-button").click(function(){
-      console.log(this);
+      // console.log(this);
+     $("#join-form").toggleClass("invis");
     });
 
+    const MIN_PLAYERS = 3;
+    const MAX_PLAYERS = 12;
+    
+    var role_list = {};
+    
+    var gameInfo = { 
+      location: undefined,
+      spy1: undefined,
+      spy2: undefined,
+      innocent: []
+    };
+
+    // 
+    // * Returns a random number between min (inclusive) and max (exclusive)
+    // 
+    function getRandomArbitrary(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    }
+    
+    function selectRandomLocation (location_list){
+      // console.log(Object.keys(location_list).length);
+      var randomInt = getRandomArbitrary(0, Object.keys(location_list).length); //alternatively, can use _random
+      console.log(randomInt);
+      
+      return _.keys(location_list)[randomInt];
+    }
+    
+    function selectRandomRoles (role_list){
+      
+    };
+    
+    function gameSetup(){
+      $.getJSON("en-US.json", function(data){
+        gameInfo.location = selectRandomLocation(locations);
+        role_list = data;
+        // console.log(data);
+        
+        var paired_data = _.pairs(data);
+        console.log(paired_data);
+      });
+      
+      
+    };
+
+    gameSetup();
+    
+    // console.log(gameInfo);  
 });

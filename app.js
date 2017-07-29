@@ -51,8 +51,9 @@ var sockets = [];
 var rooms = [];
 
 io.on('connection', function(socket){
-    console.log("Connected socket");
-    console.log(socket.id);
+    console.log("Connected socket", "id: ", socket.id);
+    // var clients = io.clients();
+    // console.log(clients);
     
     // Handle chat event
     socket.on('chat', function(data){
