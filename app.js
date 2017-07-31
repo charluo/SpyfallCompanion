@@ -8,7 +8,8 @@ var express     = require("express"),
     http = require('http');
     
 mongoose.connect("mongodb://localhost/spyfall_v1");
-app.use(favicon('./public/spyfall_favicon.ico'));
+// app.use(favicon('./public/spyfall_favicon.ico'));
+app.use(favicon('./public/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -46,12 +47,13 @@ var Player = mongoose.model("Player", playerSchema);
 var server = http.createServer(app);
 var io = socketio.listen(server);
 
-var messages = [];
-var sockets = [];
-var rooms = [];
+var messages = {};
+var sockets = {};
+var rooms = {};
 
 io.on('connection', function(socket){
     console.log("Connected socket", "id: ", socket.id);
+   // console.log(io.manager.rooms);
     // var clients = io.clients();
     // console.log(clients);
     
@@ -70,7 +72,7 @@ io.on('connection', function(socket){
     
     socket.on('create_game', function(data){ //data = room num
         
-        
+        console.log(io.sockets.manager.rooms)
     })
     
     socket.on('disconnect', function(socket){

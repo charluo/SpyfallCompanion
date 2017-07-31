@@ -1,86 +1,30 @@
 $( document ).ready(function () {
   
-    var locations  = {
-        //spyfall 1
-        "airplane":1,
-        "bank":1,
-        "beach":1,
-        "broadway_theater":1,
-        "casino":1,
-        "cathedral":1,
-        "circus_tent":1,
-        "corporate_party":1,
-        "crusader_army":1,
-        "day_spa":1,
-        "embassy":1,
-        "hospital":1,
-        "hotel":1,
-        "military_base":1,
-        "movie_studio":1,
-        "ocean_liner":1,
-        "passenger_train":1,
-        "pirate_ship":1,
-        "polar_station":1,
-        "police_station":1,
-        "restaurant":1,
-        "school":1,
-        "service_station":1,
-        "space_station":1,
-        "submarine":1,
-        "supermarket":1,
-        "university":1,
-        
-        //spyfall 2
-        "amusement_park":2,
-        "art_museum":2,
-        "candy_factory":2,
-        "cat_show":2,
-        "cemetery":2,
-        "coal_mine":2,
-        "construction_site":2,
-        "gaming_convention":2,
-        "gas_station":2,
-        "harbor_docks":2,
-        "ice_hockey_stadium":2,
-        "jail":2,
-        "jazz_club":2,
-        "library":2,
-        "night_club":2,
-        "race_track":2,
-        "retirement_home":2,
-        "rock_concert":2,
-        "sightseeing_bus":2,
-        "stadium":2,
-        "subway":2,
-        "the_un":2,
-        "vineyard":2,
-        "wedding":2,
-        "zoo":2
-    };
-    
-    var today = new Date();
-    console.log(today.getHours());
-    console.log(today.getMinutes());
-    console.log(today.getSeconds());
+    // var today = new Date();
+    // console.log(today.getHours());
+    // console.log(today.getMinutes());
+    // console.log(today.getSeconds());
     console.log("Running index.js");
     
-    // $("#jump-text").html("Inserting jQuery text.");
-
-
-    $("#start-button").click(function(){
-      // console.log(this);
-      $("#game-form").toggleClass("invis");
-    });
+    var alreadyClickedButton = 0;
     
-    $("#join-button").click(function(){
-      // console.log(this);
-     $("#join-form").toggleClass("invis");
-    });
+    // var socket = io.connect();
+
+      
+    // $( document ).ready(function () {
+    //     $("#jumbo-text").html("working");   
+    // });
+
+    function errorReport(){
+      alert("Follow the instructions. Here, this'll help.")
+      window.location.href = "http://www.readingbear.org/";
+    }
 
     const MIN_PLAYERS = 3;
-    const MAX_PLAYERS = 12;
-    
+    const MAX_PLAYERS = 8;
+    var loc_list = {};
     var role_list = {};
+    var paired_roles = [];
     
     var gameInfo = { 
       location: undefined,
@@ -109,19 +53,54 @@ $( document ).ready(function () {
     };
     
     function gameSetup(){
-      $.getJSON("en-US.json", function(data){
-        gameInfo.location = selectRandomLocation(locations);
-        role_list = data;
-        // console.log(data);
+      $.getJSON("locations.json", function(loc_data){
+        loc_list = loc_data; //save location object data
+        gameInfo.location = selectRandomLocation(loc_list);
         
-        var paired_data = _.pairs(data);
-        console.log(paired_data);
+        $.getJSON("roles.json", function(role_data){
+          role_list = role_data;
+          // console.log(data);
+          
+          paired_roles = _.pairs(role_list);
+          console.log(paired_roles);
+        });
+        
       });
       
       
     };
-
-    gameSetup();
     
+    
+    $("#start-button").click(function(){
+      // console.log(this);
+      $("#game-form").toggleClass("invis");
+      
+    });
+    
+    $("#join-button").click(function(){
+      // console.log(this);
+     $("#join-form").toggleClass("invis");
+    });
+    
+    $("#create-game-button").click(function(){
+      var x = document.querySelector("#player-input");
+      var numPlayers, numSpies;
+      if (Number(x.value) >= 3 && Number(x.value) <=8){
+        numPlayers = Number(x.value);
+      }
+      else{
+        errorReport();
+      }
+      x = document.querySelector("#spies-input")
+      if (x.value == 0 || x.value ==1){
+        numSpies = Number(x.value);
+      }
+      else{
+        errorReport();
+      }
+      
+      gameSetup();
+      
+    });
     // console.log(gameInfo);  
 });
