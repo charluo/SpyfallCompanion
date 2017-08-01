@@ -1,37 +1,36 @@
 var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
+    // mongoose    = require("mongoose"),
     favicon = require('serve-favicon'),
     async = require('async'),
     socketio = require('socket.io'),
     http = require('http');
     
-mongoose.connect("mongodb://localhost/spyfall_v1");
-// app.use(favicon('./public/spyfall_favicon.ico'));
+// mongoose.connect("mongodb://localhost/spyfall_v1");
 app.use(favicon('./public/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 //MODELS
-var gameroomSchema = new mongoose.Schema({ //Gameroom
-    roomID: Number,
-    playerCount: Number
-});
+// var gameroomSchema = new mongoose.Schema({ //Gameroom
+//     roomID: Number,
+//     playerCount: Number
+// });
 
-var Gameroom = mongoose.model("Gameroom", gameroomSchema);
+// var Gameroom = mongoose.model("Gameroom", gameroomSchema);
 
-var playerSchema = new mongoose.Schema({ //Players
-    name: String,
-    // id: {
-    //     type: mongoose.Schema.Types.ObjectID,
-    //     ref: "Gameroom"
-    // }
-    roomID: Number
-})
+// var playerSchema = new mongoose.Schema({ //Players
+//     name: String,
+//     // id: {
+//     //     type: mongoose.Schema.Types.ObjectID,
+//     //     ref: "Gameroom"
+//     // }
+//     roomID: Number
+// })
 
-var Player = mongoose.model("Player", playerSchema);
+// var Player = mongoose.model("Player", playerSchema);
 
 // Gameroom.create({roomID: 69, playerCount: 1}, function(err, newlyCreated){
 //     if (err){
