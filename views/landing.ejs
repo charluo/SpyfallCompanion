@@ -19,13 +19,13 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script type="text/javascript" src="index.js"></script>
-
+        <!--<script type="text/javascript" src="index.js"></script>-->
 
 </head>
 <body>
@@ -103,11 +103,11 @@
                     <!--<form action="/login" method="post">-->
                     <form>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="room_id" placeholder="ID Room">
+                            <input id="id-input" class="form-control" type="text" name="room_id" placeholder="ID Room">
                         </div>
                     </form>
                         <div>
-                            <button class="btn btn-lg btn-primary btn-block">Enter Room</button>
+                            <button id="join-game-button" class="btn btn-lg btn-primary btn-block">Enter Room</button>
                         </div>
                 </div>
             </div>
@@ -123,6 +123,18 @@
             else you can come up with — trying to guess who among them is the spy. The spy doesn't know where he is, so he has to listen carefully. When
             it's his time to answer, he'd better create a good story!</p>
         </div>
+        
+        <div class="container">
+            <div id="location-list">
+                <h4>List of Possible Locations</h4>
+            </div>
+        </div>
+</div>
+
+<div id="game-box">
+    <h1>GAME BOX</h1>
+    <hr>
+    <p id="game-text"></p>
 </div>
 
 <div id="chat-box" class="container">
@@ -171,6 +183,7 @@
 
 
 
-<script type="text/javascript" src="chat.js"></script>
+<!--<script type="text/javascript" src="chat.js"></script>-->
+    <script type="text/javascript" src="index.js"></script>
 </body>
 </html>

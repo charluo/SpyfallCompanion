@@ -47,9 +47,9 @@ var Player = mongoose.model("Player", playerSchema);
 var server = http.createServer(app);
 var io = socketio.listen(server);
 
-var messages = {};
-var sockets = {};
-var rooms = {};
+//var messages = {};
+//var sockets = {};
+var gameRooms = {};
 
 io.on('connection', function(socket){
     console.log("Connected socket", "id: ", socket.id);
@@ -68,12 +68,47 @@ io.on('connection', function(socket){
         socket.broadcast.emit('typing', data);
     });
     
-    var room_id, player_id;
-    
-    socket.on('create_game', function(data){ //data = room num
+    socket.on('create_game', function(data){ //data = gameInfo obj
+        // console.log(data);
+        // console.log("You are in room " + data.roomID);
         
-        console.log(io.sockets.manager.rooms)
+        socket.join(data.roomID);
+        
+        data.connectedPlayers[0] = 1; //marking first connected player
+        gameRooms[data.roomID] = data;
+        
+        io.sockets.in(data.roomID).emit('made_room', data);
+        // console.log(io.sockets.manager.rooms)
     })
+    
+    socket.on("join_room", function(data){ //data = room id
+        if (!gameRooms[data]){
+            socket.emit("err", "Sorry, error joining that room.");
+        }
+        else{
+            console.log(gameRooms);
+            var playerNum = gameRooms[data].totConnected;
+            socket.join(data); //join room
+            var gameObj = gameRooms[data];
+            
+            gameRooms[data].connectedPlayers[gameObj.totConnected] = 1;
+            ++gameRooms[data].totConnected;
+            
+            if(gameObj.players[playerNum] === 1){ //spy
+                socket.emit("show-spy", gameObj);
+            }
+            else {
+                socket.emit("show-innocent", gameObj);
+            }
+            
+            ++playerNum;
+            if(playerNum === gameRooms[data].numPlayers){ //everyone connected
+                io.sockets.in(data).emit("start-game", gameRooms[data]);
+            }
+        }
+        
+        
+    });
     
     socket.on('disconnect', function(socket){
         console.log("Disconnected socket");

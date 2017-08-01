@@ -1,3 +1,5 @@
+console.log("Running chat.js");
+
 var socket = io.connect();
 
 // Query DOM
