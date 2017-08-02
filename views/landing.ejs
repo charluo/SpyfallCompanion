@@ -22,6 +22,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -67,7 +68,7 @@
 
 <div class="container">
 
-    <div class="jumbotron">
+    <div id="jumbotron-1" class="jumbotron">
         <p class="text-center">Basic implementation of the game Spyfall</p>
         <p id="jumbo-text"></p>
         <br/>
@@ -113,29 +114,88 @@
             </div>
         </div>
     </div>
-        <div class="container">
-        <h4>ABOUT THE GAME</h4>
+    
+    <div class="container" id="game-box">
+        <div id="jumbotron-2"class="jumbotron">
+            <!--<h4 class="text-center">GAME BOX</h1>-->
+            <p id="game-text">Waiting on game...</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h4 class="text-center">List of Possible Locations</h4>
+        <hr>
+        <div class="col-lg-6" id="location-list">
+            <li>        Airplane</li>
+            <li>        Bank</li>
+            <li>        Beach</li>
+            <li>        Broadway Theater</li>
+            <li>        Casino</li>
+            <li>        Cathedral</li>
+            <li>        Circus Tent</li>
+            <li>        Corporate Party</li>
+            <li>        Crusader Army</li>
+            <li>        Day Spa</li>
+            <li>        Embassy</li>
+            <li>        Hospital</li>
+            <li>        Hotel</li>
+            <li>        Military Base</li>
+            <li>        Movie Studio</li>
+            <li>        Ocean Liner</li>
+            <li>        Passenger Train</li>
+            <li>        Pirate Ship</li>
+            <li>        Polar Station</li>
+            <li>        Police Station</li>
+            <li>        Restaurant</li>
+            <li>        School</li>
+            <li>        Service Station</li>
+            <li>        Space Station</li>
+            <li>        Submarine</li>
+            <li>        Supermarket</li>
+            <li>        University</li>
+        </div>
+         <div class="col-lg-6" id="location-list">
+            <li>        Amusement Park</li>
+            <li>        Art Museum</li>
+            <li>        Candy Factory</li>
+            <li>        Cat Show</li>
+            <li>        Cemetery</li>
+            <li>        Coal Mine</li>
+            <li>        Construction Site</li>
+            <li>        Gaming Convention</li>
+            <li>        Gas Station</li>
+            <li>        Harbor Docks</li>
+            <li>        Ice Hockey Stadium</li>
+            <li>        Jail</li>
+            <li>        Jazz Club</li>
+            <li>        Library</li>
+            <li>        Night Club</li>
+            <li>        Race Track</li>
+            <li>        Retirement Home</li>
+            <li>        Rock Concert</li>
+            <li>        Sightseeing Bus</li>
+            <li>        Stadium</li>
+            <li>        Subway</li>
+            <li>        The Un</li>
+            <li>        Vineyard</li>
+            <li>        Wedding</li>
+            <li>        Zoo</li>
+            </div>
+    </div>
+    
+    <div class="container">
+        <hr>
+        <h4 class="text-center">ABOUT THE GAME</h4>
         <p>Spyfall is a party game unlike any other, one in which you get to be a spy and try to understand what's going on around you. It's really simple!
-
+    
             Spyfall is played over several rounds, and at the start of each round all players receive cards showing the same location — a casino,
             a traveling circus, a pirate ship, or even a space station — except that one player receives a card that says "Spy" instead of the location.
             Players then start asking each other questions — "Why are you dressed so strangely?" or "When was the last time we got a payday?" or anything
             else you can come up with — trying to guess who among them is the spy. The spy doesn't know where he is, so he has to listen carefully. When
             it's his time to answer, he'd better create a good story!</p>
         </div>
-        
-        <div class="container">
-            <div id="location-list">
-                <h4>List of Possible Locations</h4>
-            </div>
-        </div>
-</div>
-
-<div id="game-box">
-    <h1>GAME BOX</h1>
-    <hr>
-    <p id="game-text"></p>
-</div>
+    
+    </div>
 
 <div id="chat-box" class="container">
     <h3>Global Chat</h3>
@@ -157,7 +217,7 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-md-4">
-                <span class="copyright">Copyright &copy; Charles Luo 2017</span>
+                <span class="copyright">Created by Charles Luo 2017</span>
             </div>
             <div class="col-md-4">
                 <ul class="list-inline social-buttons">

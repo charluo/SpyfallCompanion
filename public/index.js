@@ -212,6 +212,7 @@ $( document ).ready(function () {
       var id = x.value;
       
       socket.emit("join_room", id);
+      $("#join-form").toggleClass("invis");
     });
     
     $("#create-game-button").click(function(){
@@ -231,6 +232,7 @@ $( document ).ready(function () {
         errorReport();
       }
       
+      $("#game-form").toggleClass("invis");
       gameSetup(numPlayers, numSpies);
       
     });
@@ -260,9 +262,12 @@ socket.on("start-game", function(data){
 
 socket.on("show-spy", function(data){
   bootbox.alert("You're the spy!");
-
+   $("#game-text").html("You are the spy! Sneaky sneaky..");
+    $("#game-text").append("There are " + data.numPlayers + " players total with " + data.numSpies + " spies.")
 });
 
 socket.on("show-innocent", function(data){
-  bootbox.alert("You're innocent!");
+  bootbox.alert("You're innocent! The location is the " + data.location);
+   $("#game-text").html("You are not the spy! The location is the " + data.location.toUpperCase() + ". <br>");
+    $("#game-text").append("There are " + data.numPlayers + " players total with " + data.numSpies + " spies.")
 });

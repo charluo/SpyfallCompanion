@@ -1,5 +1,22 @@
 *{
-    font-family: Roboto, Montserrat;
+    font-family: "Montserrat" , "Roboto";
+}
+
+body{
+    background-color: #c3c3c3;
+    /*background-image: url(https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAxGAAAAJGFjNWU3ZWQyLTcxNjAtNDliMC1iNzIwLWIzNzJlOGFiZDcwMw.jpg);*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+}
+
+.btn-success, .btn-info {
+  color: white;
+  background-color: #fed136;
+  border-color: #fed136;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 h2{
@@ -69,10 +86,16 @@ input{
     border-radius: 0 0 2px 2px;
 }
 
-.jumbotron {
-    /*padding: 5%;*/
-    /*margin: 10%;*/
+#jumbotron-1 {
+    /*background-color: #c8d69e;*/
+    background-color: #c3c3c3;
     margin-top: 75px;
+}
+
+#jumbotron-2 {
+    background-color: #c3c3c3;
+    font-family: "Kaushan Script";
+    border: solid black;
 }
 
 footer {
@@ -86,6 +109,37 @@ footer {
 
 .invis {
     display:none;
+}
+
+/*Bootstrap temp styles*/
+.navbar-custom {
+  background-color: #222222;
+  border-color: transparent;
+}
+.navbar-custom .navbar-brand {
+  color: #32ad6d;
+  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .navbar-brand:active,
+.navbar-custom .navbar-brand.active {
+  color: #fec503;
+}
+.navbar-custom .navbar-collapse {
+  border-color: rgba(255, 255, 255, 0.02);
+}
+.navbar-custom .navbar-toggle {
+  background-color: #32ad6d;
+  border-color: #32ad6d;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  color: white;
+  font-size: 12px;
+}
+.navbar-custom .navbar-toggle:hover,
+.navbar-custom .navbar-toggle:focus {
+  background-color: #fed136;
 }
 
 
