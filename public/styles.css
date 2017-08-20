@@ -25,14 +25,6 @@ h2{
     color: #575ed8;
 }
 
-#mario-chat{
-    max-width: 600px;
-    margin: 30px auto;
-    border: 1px solid #ddd;
-    box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
-    border-radius: 2px;
-}
-
 #chat-window{
     height: 400px;
     overflow: auto;
@@ -118,7 +110,7 @@ footer {
 }
 .navbar-custom .navbar-brand {
   color: #32ad6d;
-  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, cursive;
 }
 .navbar-custom .navbar-brand:hover,
 .navbar-custom .navbar-brand:focus,

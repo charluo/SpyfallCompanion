@@ -1,60 +1,24 @@
 var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
-    // mongoose    = require("mongoose"),
     favicon = require('serve-favicon'),
     async = require('async'),
     socketio = require('socket.io'),
     http = require('http');
     
-// mongoose.connect("mongodb://localhost/spyfall_v1");
 app.use(favicon('./public/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-//MODELS
-// var gameroomSchema = new mongoose.Schema({ //Gameroom
-//     roomID: Number,
-//     playerCount: Number
-// });
-
-// var Gameroom = mongoose.model("Gameroom", gameroomSchema);
-
-// var playerSchema = new mongoose.Schema({ //Players
-//     name: String,
-//     // id: {
-//     //     type: mongoose.Schema.Types.ObjectID,
-//     //     ref: "Gameroom"
-//     // }
-//     roomID: Number
-// })
-
-// var Player = mongoose.model("Player", playerSchema);
-
-// Gameroom.create({roomID: 69, playerCount: 1}, function(err, newlyCreated){
-//     if (err){
-//         console.log(err);
-//     }
-//     else{
-//       console.log("Created gameroom");
-//     }
-// })
-
-//SOCKET IO CHAT
 
 var server = http.createServer(app);
 var io = socketio.listen(server);
 
-//var messages = {};
-//var sockets = {};
 var gameRooms = {};
 
 io.on('connection', function(socket){
     console.log("Connected socket", "id: ", socket.id);
-   // console.log(io.manager.rooms);
-    // var clients = io.clients();
-    // console.log(clients);
     
     // Handle chat event
     socket.on('chat', function(data){
@@ -77,7 +41,6 @@ io.on('connection', function(socket){
         gameRooms[data.roomID] = data;
         
         io.sockets.in(data.roomID).emit('made_room', data);
-        // console.log(io.sockets.manager.rooms)
     })
     
     socket.on("join_room", function(data){ //data = room id
@@ -106,7 +69,6 @@ io.on('connection', function(socket){
             }
         }
         
-        
     });
     
     socket.on('disconnect', function(socket){
@@ -120,16 +82,16 @@ app.get("/", function(request, response){
     response.render("landing");
 });
 
-app.get("/:id", function(req, res){
-   res.render("gamepage"); 
-});
+// app.get("/:id", function(req, res){
+//   res.render("gamepage"); 
+// });
 
-app.get("/gamepage", function(req, res){
-    res.render("gamepage");
-});
+// app.get("/gamepage", function(req, res){
+//     res.render("gamepage");
+// });
 
 app.get("*", function(req, res){
-    res.send("You done fucked up. Page not found - 404 error.")
+    res.send("Page not found - 404 error.")
 })
 
 //START SERVER

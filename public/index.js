@@ -46,20 +46,9 @@ socket.on('typing', function(data){
 
 $( document ).ready(function () {
   
-    // var today = new Date();
-    // console.log(today.getHours());
-    // console.log(today.getMinutes());
-    // console.log(today.getSeconds());
     console.log("Running index.js");
     
     var alreadyClickedButton = 0;
-    
-    // var socket = io.connect();
-
-      
-    // $( document ).ready(function () {
-    //     $("#jumbo-text").html("working");   
-    // });
 
     function errorReport(){
       alert("Follow the instructions. Here, maybe this'll help.")
@@ -140,10 +129,6 @@ $( document ).ready(function () {
         gameInfo.location = selectRandomLocation(loc_list); //
         gameInfo.numPlayers = numPlayers; //
         
-        // _.keys(loc_list).forEach(function(element){
-        //   $("#location-list").append("<li>" + element + "</li>");
-        // });
-        
         $.getJSON("roles.json", function(role_data){
           role_list = role_data;
           // console.log(data);
@@ -187,12 +172,7 @@ $( document ).ready(function () {
           socket.emit('create_game', gameInfo);
           console.log(gameInfo);
         });
-        
-        
       });
-      
-
-      
     };//end of gameSetup()
     
     
@@ -236,7 +216,7 @@ $( document ).ready(function () {
       gameSetup(numPlayers, numSpies);
       
     });
-    // console.log(gameInfo);  
+
 });
 
 socket.on("err", function(msg){

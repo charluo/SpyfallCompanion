@@ -4,10 +4,6 @@ var socket = io.connect();
 
 // Query DOM
 
-$( document ).ready(function () {
-    $("#jumbo-text").html(socket.id);   
-});
-
 var message = document.getElementById('message'),
       handle = document.getElementById('handle'),
       btn = document.getElementById('send'),
@@ -33,7 +29,6 @@ message.addEventListener('keypress', function(event){
         message.value = "";
     }
 })
-
 
 // Listen for events
 socket.on('chat', function(data){
