@@ -32,8 +32,6 @@ io.on('connection', function(socket){
     });
     
     socket.on('create_game', function(data){ //data = gameInfo obj
-        // console.log(data);
-        // console.log("You are in room " + data.roomID);
         
         socket.join(data.roomID);
         
@@ -50,13 +48,14 @@ io.on('connection', function(socket){
         else{
             console.log(gameRooms);
             var playerNum = gameRooms[data].totConnected;
-            socket.join(data); //join room
+            socket.join(data);
             var gameObj = gameRooms[data];
             
             gameRooms[data].connectedPlayers[gameObj.totConnected] = 1;
             ++gameRooms[data].totConnected;
             
-            if(gameObj.players[playerNum] === 1){ //spy
+            //1 signifies spy status
+            if(gameObj.players[playerNum] === 1){ 
                 socket.emit("show-spy", gameObj);
             }
             else {
@@ -64,7 +63,7 @@ io.on('connection', function(socket){
             }
             
             ++playerNum;
-            if(playerNum === gameRooms[data].numPlayers){ //everyone connected
+            if(playerNum === gameRooms[data].numPlayers){
                 io.sockets.in(data).emit("start-game", gameRooms[data]);
             }
         }
@@ -82,17 +81,11 @@ app.get("/", function(request, response){
     response.render("landing");
 });
 
-// app.get("/:id", function(req, res){
-//   res.render("gamepage"); 
-// });
-
-// app.get("/gamepage", function(req, res){
-//     res.render("gamepage");
-// });
 
 app.get("*", function(req, res){
     res.send("Page not found - 404 error.")
 })
+
 
 //START SERVER
 // app.listen(process.env.PORT, process.env.IP, function(){
