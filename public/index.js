@@ -55,6 +55,7 @@ $( document ).ready(function () {
       window.location.href = "http://www.readingbear.org/";
     }
 
+    //     Initialize starting variables. See generating functions for more info.
     const MIN_PLAYERS = 3;
     const MAX_PLAYERS = 8;
     var loc_list = {};
@@ -74,12 +75,14 @@ $( document ).ready(function () {
       connectedPlayers: []
     };
 
+    
     // 
     // * Returns a random number between min (inclusive) and max (exclusive)
     // 
     function getRandomArbitrary(min, max) {
         return Math.round(Math.random() * (max - min) + min);
     }
+    
     
     function guid() {
       function s4() {
@@ -91,6 +94,7 @@ $( document ).ready(function () {
       //   s4() + '-' + s4() + s4() + s4();
       return s4();
     };
+    
     
     function selectRandomLocation (location_list){
       // console.log(Object.keys(location_list).length);
@@ -219,9 +223,12 @@ $( document ).ready(function () {
 
 });
 
+// ----------------------------------------PROCESS SOCKET EVENTS ---------------------------------------- //
+
 socket.on("err", function(msg){
   bootbox.alert(msg);  
 });
+
 
 socket.on('made_room', function(data){
     // alert("Received data!" + data.roomID);
@@ -236,9 +243,11 @@ socket.on('made_room', function(data){
     $("#game-text").append("There are " + data.numPlayers + " players total with " + data.numSpies + " spies.")
 });
 
+
 socket.on("start-game", function(data){
   bootbox.alert("Starting game!");
 });
+
 
 socket.on("show-spy", function(data){
   bootbox.alert("You're the spy!");
@@ -246,8 +255,10 @@ socket.on("show-spy", function(data){
     $("#game-text").append("There are " + data.numPlayers + " players total with " + data.numSpies + " spies.")
 });
 
+
 socket.on("show-innocent", function(data){
   bootbox.alert("You're innocent! The location is the " + data.location);
    $("#game-text").html("You are not the spy! The location is the " + data.location.toUpperCase() + ". <br>");
     $("#game-text").append("There are " + data.numPlayers + " players total with " + data.numSpies + " spies.")
 });
+
